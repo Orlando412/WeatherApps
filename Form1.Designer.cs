@@ -41,11 +41,11 @@
             label9 = new Label();
             label10 = new Label();
             label11 = new Label();
-            label12 = new Label();
+            temperatureLabel = new Label();
             label13 = new Label();
-            label14 = new Label();
+            descriptionLabel = new Label();
             label15 = new Label();
-            label16 = new Label();
+            windSpeedLabel = new Label();
             label17 = new Label();
             label18 = new Label();
             label19 = new Label();
@@ -176,7 +176,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(514, 341);
+            label10.Location = new Point(314, 175);
             label10.Name = "label10";
             label10.Size = new Size(39, 15);
             label10.TabIndex = 11;
@@ -191,14 +191,14 @@
             label11.TabIndex = 12;
             label11.Text = "Day 2:";
             // 
-            // label12
+            // temperatureLabel
             // 
-            label12.AutoSize = true;
-            label12.Location = new Point(588, 341);
-            label12.Name = "label12";
-            label12.Size = new Size(44, 15);
-            label12.TabIndex = 13;
-            label12.Text = "label12";
+            temperatureLabel.AutoSize = true;
+            temperatureLabel.Location = new Point(388, 175);
+            temperatureLabel.Name = "temperatureLabel";
+            temperatureLabel.Size = new Size(44, 15);
+            temperatureLabel.TabIndex = 13;
+            temperatureLabel.Text = "label12";
             // 
             // label13
             // 
@@ -209,14 +209,14 @@
             label13.TabIndex = 14;
             label13.Text = "label13";
             // 
-            // label14
+            // descriptionLabel
             // 
-            label14.AutoSize = true;
-            label14.Location = new Point(670, 341);
-            label14.Name = "label14";
-            label14.Size = new Size(44, 15);
-            label14.TabIndex = 15;
-            label14.Text = "label14";
+            descriptionLabel.AutoSize = true;
+            descriptionLabel.Location = new Point(470, 175);
+            descriptionLabel.Name = "descriptionLabel";
+            descriptionLabel.Size = new Size(44, 15);
+            descriptionLabel.TabIndex = 15;
+            descriptionLabel.Text = "label14";
             // 
             // label15
             // 
@@ -228,14 +228,14 @@
             label15.Text = "label15";
             label15.Click += label15_Click;
             // 
-            // label16
+            // windSpeedLabel
             // 
-            label16.AutoSize = true;
-            label16.Location = new Point(742, 341);
-            label16.Name = "label16";
-            label16.Size = new Size(44, 15);
-            label16.TabIndex = 17;
-            label16.Text = "label16";
+            windSpeedLabel.AutoSize = true;
+            windSpeedLabel.Location = new Point(588, 175);
+            windSpeedLabel.Name = "windSpeedLabel";
+            windSpeedLabel.Size = new Size(44, 15);
+            windSpeedLabel.TabIndex = 17;
+            windSpeedLabel.Text = "label16";
             // 
             // label17
             // 
@@ -473,11 +473,11 @@
             Controls.Add(label26);
             Controls.Add(label18);
             Controls.Add(label17);
-            Controls.Add(label16);
+            Controls.Add(windSpeedLabel);
             Controls.Add(label15);
-            Controls.Add(label14);
+            Controls.Add(descriptionLabel);
             Controls.Add(label13);
-            Controls.Add(label12);
+            Controls.Add(temperatureLabel);
             Controls.Add(label11);
             Controls.Add(label10);
             Controls.Add(label9);
@@ -514,11 +514,11 @@
         private Label label9;
         private Label label10;
         private Label label11;
-        private Label label12;
+        private Label temperatureLabel;
         private Label label13;
-        private Label label14;
+        private Label descriptionLabel;
         private Label label15;
-        private Label label16;
+        private Label windSpeedLabel;
         private Label label17;
         private Label label18;
         private Label label19;

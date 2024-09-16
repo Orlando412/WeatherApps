@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace WeatherApp
 {
-    internal class weatherData
+    internal class WeatherData
     {
-        public Coord coord {  get; set; }
-        public List<Weather> weather { get; set; }
-        public Main main { get; set; }
+        public Coord Coord {  get; set; }
+        public List<Weather> Weather { get; set; }
+        public Main Main { get; set; }
         public Wind Wind { get; set; }
         public Clouds Clouds { get; set; }
-        public string name { get; set; }
-        public string timezone { get; set; }
-        public string id { get; set; }
-        public string cod { get; set; }
+        public Sys Sys { get; set; }
+        public string Name { get; set; }
+        public int Timezone { get; set; }
+        public int Id { get; set; }
+        public int Cod { get; set; }
     }
 
     internal class Coord
@@ -36,7 +37,7 @@ namespace WeatherApp
     internal class Main
     {
         public double temp { get; set; }
-        public double feels_Like { get; set; }
+        public double feelsLike { get; set; }
         public double temp_Min { get; set; }
         public double temp_Max { get; set; }
         public int pressure { get; set; }
@@ -57,7 +58,7 @@ namespace WeatherApp
 
     internal class Sys
     {
-        public string Country { get; set; }
+        public string country { get; set; }
         public long sunrise { get; set; }
         public long sunset { get; set; }
     }
