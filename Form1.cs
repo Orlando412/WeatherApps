@@ -64,8 +64,9 @@ namespace WeatherApp
 
         private async void FetchDataFromApi(string searchTerm)
         {
-            string apiUrl = $"https://api.openweathermap.org/data/2.5/weather?q={searchTerm}&appid=c5bd03a941238a627959a47a8177f59d";
-            
+            // string apiUrl = $"https://api.openweathermap.org/data/2.5/weather?q={searchTerm}&appid=c5bd03a941238a627959a47a8177f59d";
+            string apiUrl = $"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=current,minutely,hourly,alerts&appid={searchTerm}";
+
 
             using (HttpClient client = new HttpClient())
             {
@@ -81,17 +82,17 @@ namespace WeatherApp
 
                         WeatherData weatherData = JsonConvert.DeserializeObject<WeatherData>(data);
 
+                        double tempInCelsius = weatherData.Main.temp - 273.15;
+                        double tempInFahrenheit = (weatherData.Main.temp - 273.15) * 9 / 5 + 32;
+
+                        //process the data 
                         temperatureLabel.Text = $"{weatherData.Main.temp} K";
                         descriptionLabel.Text = weatherData.Weather[0].description;
                         windSpeedLabel.Text = $"{weatherData.Wind.speed} m/s";
-                        //process the data 
-                        //searchTextBox.Text = $"Location: {weatherData.Name}\n" +
-                        //              $"Temperature: {weatherData.Main.Temp - 273.15:0.0} °C\n" +
-                        //              $"Weather: {weatherData.Weather[0].Description}\n" +
-                        //              $"Humidity: {weatherData.Main.Humidity}%\n" +
-                        //              $"Wind Speed: {weatherData.Wind.Speed} m/s"; ;
+                        currentTempLabel.Text = $"{tempInCelsius:0.00} °C / {tempInFahrenheit:0.00} °F";
+                        locationLabel.Text = searchTerm;
                         searchTextBox.Text = searchTerm;
-                        //searchTerm = searchTextBox.Text;
+                        currentConditionLabel.Text = weatherData.Weather[0].description;
 
                     }
                     else

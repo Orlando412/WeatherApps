@@ -33,12 +33,11 @@
             searchTextBox = new TextBox();
             button1 = new Button();
             label3 = new Label();
-            label4 = new Label();
+            locationLabel = new Label();
             label5 = new Label();
-            label6 = new Label();
+            currentTempLabel = new Label();
             label7 = new Label();
-            label8 = new Label();
-            label9 = new Label();
+            currentConditionLabel = new Label();
             label10 = new Label();
             label11 = new Label();
             temperatureLabel = new Label();
@@ -117,14 +116,14 @@
             label3.TabIndex = 4;
             label3.Text = "Location: ";
             // 
-            // label4
+            // locationLabel
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(179, 175);
-            label4.Name = "label4";
-            label4.Size = new Size(38, 15);
-            label4.TabIndex = 5;
-            label4.Text = "label4";
+            locationLabel.AutoSize = true;
+            locationLabel.Location = new Point(179, 175);
+            locationLabel.Name = "locationLabel";
+            locationLabel.Size = new Size(38, 15);
+            locationLabel.TabIndex = 5;
+            locationLabel.Text = "label4";
             // 
             // label5
             // 
@@ -136,14 +135,14 @@
             label5.Text = "Current Temperature:";
             label5.Click += label5_Click;
             // 
-            // label6
+            // currentTempLabel
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(212, 213);
-            label6.Name = "label6";
-            label6.Size = new Size(38, 15);
-            label6.TabIndex = 7;
-            label6.Text = "label6";
+            currentTempLabel.AutoSize = true;
+            currentTempLabel.Location = new Point(212, 213);
+            currentTempLabel.Name = "currentTempLabel";
+            currentTempLabel.Size = new Size(38, 15);
+            currentTempLabel.TabIndex = 7;
+            currentTempLabel.Text = "label6";
             // 
             // label7
             // 
@@ -154,24 +153,14 @@
             label7.TabIndex = 8;
             label7.Text = "Condition: ";
             // 
-            // label8
+            // currentConditionLabel
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(179, 252);
-            label8.Name = "label8";
-            label8.Size = new Size(38, 15);
-            label8.TabIndex = 9;
-            label8.Text = "label8";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(259, 252);
-            label9.Name = "label9";
-            label9.Size = new Size(38, 15);
-            label9.TabIndex = 10;
-            label9.Text = "label9";
-            label9.Click += label9_Click;
+            currentConditionLabel.AutoSize = true;
+            currentConditionLabel.Location = new Point(179, 252);
+            currentConditionLabel.Name = "currentConditionLabel";
+            currentConditionLabel.Size = new Size(38, 15);
+            currentConditionLabel.TabIndex = 9;
+            currentConditionLabel.Text = "label8";
             // 
             // label10
             // 
@@ -480,12 +469,11 @@
             Controls.Add(temperatureLabel);
             Controls.Add(label11);
             Controls.Add(label10);
-            Controls.Add(label9);
-            Controls.Add(label8);
+            Controls.Add(currentConditionLabel);
             Controls.Add(label7);
-            Controls.Add(label6);
+            Controls.Add(currentTempLabel);
             Controls.Add(label5);
-            Controls.Add(label4);
+            Controls.Add(locationLabel);
             Controls.Add(label3);
             Controls.Add(button1);
             Controls.Add(searchTextBox);
@@ -506,12 +494,11 @@
         private TextBox searchTextBox;
         private Button button1;
         private Label label3;
-        private Label label4;
+        private Label locationLabel;
         private Label label5;
-        private Label label6;
+        private Label currentTempLabel;
         private Label label7;
-        private Label label8;
-        private Label label9;
+        private Label currentConditionLabel;
         private Label label10;
         private Label label11;
         private Label temperatureLabel;
