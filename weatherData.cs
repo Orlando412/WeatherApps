@@ -67,6 +67,7 @@ namespace WeatherApp
     internal class ForecastData
     {
         public List<Daily> daily { get; set; }
+        public List<ThreeHourForecast> List { get; set; }
     }
 
     internal class Daily
@@ -90,6 +91,15 @@ namespace WeatherApp
         public string condition { get; set; }
         public string humidity { get; set; }
         public string windSpeed { get; set; }
+    }
+
+    internal class ThreeHourForecast
+    {
+        public long Dt { get; set; }
+        public Main Main { get; set; }
+        public List<Weather> Weather { get; set; }
+        public Wind Wind { get; set; }
+        public Clouds Clouds { get; set; }
     }
 
 }

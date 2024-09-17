@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Text;
 
 
 namespace WeatherApp
@@ -81,6 +82,16 @@ namespace WeatherApp
 
                         WeatherData weatherData = JsonConvert.DeserializeObject<WeatherData>(data);
 
+
+                        // Null check to ensure weather data exists
+                        if (weatherData?.Main == null || weatherData.Weather == null || weatherData.Weather.Count == 0)
+                        {
+                            MessageBox.Show("Weather data is unavailable.");
+                            
+                        }
+
+
+
                         double tempInCelsius = weatherData.Main.temp - 273.15;
                         double tempInFahrenheit = (weatherData.Main.temp - 273.15) * 9 / 5 + 32;
                         double latitude = weatherData.Coord.lat;
@@ -119,7 +130,8 @@ namespace WeatherApp
         private async Task Get5DayForcast(double lat, double lon)
         {
             string apiKey = "c5bd03a941238a627959a47a8177f59d";
-            string forecastUrl = $"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={apiKey}&units=metric\r\n";
+            //string forecastUrl = $"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={apiKey}&units=metric\r\n";
+            string forecastUrl = $"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={apiKey}&units=metric";
 
             using (HttpClient client = new HttpClient())
             {
@@ -127,6 +139,10 @@ namespace WeatherApp
                 {
                     //sends GET rewuest for the forecast (7 days)
                     HttpResponseMessage responseMessage = await client.GetAsync(forecastUrl);
+
+                    
+                   
+
 
                     if (!responseMessage.IsSuccessStatusCode)
                     {
@@ -150,30 +166,58 @@ namespace WeatherApp
                             return;
                         }
 
-                        //deserialize the forecast data 
+                        // Deserialize the forecast data
                         ForecastData forecastData = JsonConvert.DeserializeObject<ForecastData>(fData);
 
-
-                        //prepare the forecast data for display in the data grid view
-                        List<ForecastDisplay> forecastList = new List<ForecastDisplay>();
-
-
-                        foreach (var day in forecastData.daily.Take(5))
+                        if (forecastData == null || forecastData.List == null || forecastData.List.Count == 0)
                         {
-
-                            forecastList.Add(new ForecastDisplay
-                            {
-                                date = TimeStampToDateTime(day.dt).ToString("dd-MM-yyyy"),
-                                temperature = $"{day.temp.day} °C",
-                                condition = day.weather[0].description,
-                                humidity = $"{day.humidity} %",
-                                windSpeed = $"{day.wind_Speed} m/s"
-                            });
+                            MessageBox.Show("No forecast data available.");
+                            return;
                         }
 
-                        //bind the forecast data to a data grid view 
-                        dataGridView1.DataSource = forecastList;
+                        // Prepare the forecast data for display in the data grid view
+                        var forecastList = forecastData.List
+                            .GroupBy(f => TimeStampToDateTime(f.Dt).Date)
+                            .Select(g => new ForecastDisplay
+                            {
+                                date = g.Key.ToString("dd-MM-yyyy"),
+                                temperature = $"{g.Average(f => f.Main.temp):0.00} °C",
+                                condition = g.First().Weather[0].description,
+                                humidity = $"{g.Average(f => f.Main.humidity):0.00} %",
+                                windSpeed = $"{g.Average(f => f.Wind.speed):0.00} m/s"
+                            })
+                            .Take(5)
+                            .ToList();
 
+                        // Debug: Check the contents of forecastList
+                        StringBuilder sb = new StringBuilder();
+                        foreach (var item in forecastList)
+                        {
+                            sb.AppendLine($"Date: {item.date}, Temperature: {item.temperature}, Condition: {item.condition}, Humidity: {item.humidity}, WindSpeed: {item.windSpeed}");
+                        }
+                        MessageBox.Show(sb.ToString(), "Forecast Data");
+
+                        // Clear existing rows and bind the forecast data to a data grid view
+                        dataGridView1.Rows.Clear();
+                        dataGridView1.DataSource = forecastList;
+                        dataGridView1.Refresh();
+
+                        //foreach (var day in forecastData.daily.Take(5))
+                        //{
+
+                        //    forecastList.Add(new ForecastDisplay
+                        //    {
+                        //        date = TimeStampToDateTime(day.dt).ToString("dd-MM-yyyy"),
+                        //        temperature = $"{day.temp.day} °C",
+                        //        condition = day.weather[0].description,
+                        //        humidity = $"{day.humidity} %",
+                        //        windSpeed = $"{day.wind_Speed} m/s"
+                        //    });
+                        //}
+
+                        //bind the forecast data to a data grid view 
+                        //dataGridView1.DataSource = forecastList;
+                        //dataGridView1.Refresh();
                     }
                     else
                     {
@@ -183,6 +227,7 @@ namespace WeatherApp
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Exception occurred: {ex.Message}");
+                    MessageBox.Show($"Error: {ex.Message}");
                 }                   
 
             }
