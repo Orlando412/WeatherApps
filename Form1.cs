@@ -197,27 +197,11 @@ namespace WeatherApp
                         }
                         MessageBox.Show(sb.ToString(), "Forecast Data");
 
-                        // Clear existing rows and bind the forecast data to a data grid view
-                        dataGridView1.Rows.Clear();
+                        //bind the forecast data to a data grid view
                         dataGridView1.DataSource = forecastList;
                         dataGridView1.Refresh();
 
-                        //foreach (var day in forecastData.daily.Take(5))
-                        //{
-
-                        //    forecastList.Add(new ForecastDisplay
-                        //    {
-                        //        date = TimeStampToDateTime(day.dt).ToString("dd-MM-yyyy"),
-                        //        temperature = $"{day.temp.day} °C",
-                        //        condition = day.weather[0].description,
-                        //        humidity = $"{day.humidity} %",
-                        //        windSpeed = $"{day.wind_Speed} m/s"
-                        //    });
-                        //}
-
-                        //bind the forecast data to a data grid view 
-                        //dataGridView1.DataSource = forecastList;
-                        //dataGridView1.Refresh();
+                        
                     }
                     else
                     {
